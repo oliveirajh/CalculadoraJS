@@ -1,9 +1,9 @@
-function criaCalculadora(){
+function startCalculator(){
     return{
         display: document.querySelector('.display'),
         btnClear: document.querySelector('.btn-clear'),
 
-        inicia(){
+        start(){
             this.PressBtn();
         },
 
@@ -11,46 +11,46 @@ function criaCalculadora(){
             document.addEventListener('click', function(e){
                 const el = e.target;
                 if(el.classList.contains('btn-num')){
-                    this.btnParaDisplay(el.innerText);
+                    this.btnClick(el.innerText);
                 }
                 if(el.classList.contains('btn-clear')){
                     this.clearDisplay();
                 }
                 if(el.classList.contains('btn-del')){
-                    this.apagaUm();
+                    this.delOne();
                 }
                 if(el.classList.contains('btn-equal')){
-                    this.realizaConta();
+                    this.Result();
                 }
             }.bind(this));
         },
 
-        btnParaDisplay(valor){
-            this.display.value += valor;
+        btnClick(val){
+            this.display.value += val;
         },
 
         clearDisplay(){
             this.display.value = '';
         },
 
-        apagaUm(){
+        delOne(){
             this.display.value = this.display.value.slice(0, -1);
         },
 
-        realizaConta(){
-            let conta = this.display.value;
+        Result(){
+            let count = this.display.value;
 
             try{
-                conta = eval(conta);
+                count = eval(count);
 
-                if(!conta){
-                    alert('Conta invalida');
+                if(!count){
+                    alert('Invalid count!');
                     return;
                 }
 
-                this.display.value = String(conta);
+                this.display.value = String(count);
             }catch(e){
-                alert('Conta invalida');
+                alert('Invalid count!');
                 return;
             }
         }
@@ -59,5 +59,5 @@ function criaCalculadora(){
     }
 }
 
-const calculadora = criaCalculadora();
-calculadora.inicia();
+const calculator = startCalculator();
+calculator.start();
